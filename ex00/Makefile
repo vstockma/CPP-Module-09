@@ -6,13 +6,13 @@
 #    By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/06 15:29:39 by vstockma          #+#    #+#              #
-#    Updated: 2023/11/21 13:12:49 by vstockma         ###   ########.fr        #
+#    Updated: 2023/11/21 13:27:34 by vstockma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = btc
 
-SRC = main.cpp
+SRC = main.cpp BitcoinExchange.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
