@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:11:31 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/22 16:46:57 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:39:30 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ class BitcoinExchange
         BitcoinExchange& operator=(const BitcoinExchange& copy);
         ~BitcoinExchange();
 
-        void    getmap(std::istream& inputStream);
-        void    multiplyValuesFromFile(const std::string& filename);
+        int     getmap(std::istream& inputStream);
+        int     output(std::string file);
+        int     checkvalue(const std::string& value);
         int     checkdate(const std::string& date);
-        int     checkvalue(float value);
     //private:
         std::multimap<std::string, float> map;
 };
