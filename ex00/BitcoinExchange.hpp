@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:11:31 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/27 12:50:03 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:52:25 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <cctype>
 
 class BitcoinExchange
 {

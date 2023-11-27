@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:17:21 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/21 13:19:12 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:15:45 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,10 @@
 
 int main(int ac, char **av)
 {
+    if (ac != 2)
+    {
+        std::cout << "";
+        return 1;
+    }
     return 0;
 }

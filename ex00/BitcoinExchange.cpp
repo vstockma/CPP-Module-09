@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:27:46 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/27 13:01:34 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:57:08 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,15 +163,35 @@ int BitcoinExchange::output(std::string file)
     return 0;
 }
 
+char getdelimiter(const std::string& line)
+{
+    for (std::string::const_iterator it = line.begin(); it != line.end(); ++it)
+    {
+        char ch = *it;
+        if (!std::isalnum(ch))
+        {
+            return ch;
+        }
+    }
+    return '\0';
+}
+
 int BitcoinExchange::getmap(std::istream& inputStream)
 {
     std::string line;
     bool isFirstLine = true;
-
+    char delimiter;
     while (std::getline(inputStream, line))
     {
         if (isFirstLine && std::isalpha(line[0]))
         {
+            delimiter = getdelimiter(line);
+            isFirstLine = false;
+            continue;
+        }
+        else if (isFirstLine)
+        {
+            delimiter = getdelimiter(line);
             isFirstLine = false;
             continue;
         }
@@ -180,7 +200,7 @@ int BitcoinExchange::getmap(std::istream& inputStream)
         std::istringstream iss(line);
         std::string date_str, value_str;
 
-        if (std::getline(iss, date_str, ',') && std::getline(iss >> std::ws, value_str))
+        if (std::getline(iss, date_str, delimiter) && std::getline(iss >> std::ws, value_str))
         {
             if (date_str.size() != 10 || date_str[4] != '-' || date_str[7] != '-')
             {
