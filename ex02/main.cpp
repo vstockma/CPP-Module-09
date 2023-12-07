@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:21:31 by vstockma          #+#    #+#             */
-/*   Updated: 2023/12/07 15:51:56 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:06:37 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ int main(int ac, char **av)
     finishFinalVectorInsertion(&merge);
     clock_t end_time = clock();
     double duration = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
-    
     merge.printNumbers(2, av);
     std::cout << "Time to process a range of " << ac - 1 << " elements with std::vector:  "; 
-    
     std::cout << std::fixed << duration << std::setprecision(6) << " us"<< std::endl;
-    
+
     start_time = clock();
     for (int i = 1; i < ac; i++)
         merge.deque.push_back(atoi(av[i]));
@@ -55,7 +53,6 @@ int main(int ac, char **av)
     finishFinalDequeInsertion(&merge);
     end_time = clock();
     duration = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
-    
     std::cout << "Time to process a range of " << ac - 1 << " elements with std::deque:  "; 
     std::cout << std::fixed << duration << std::setprecision(6) << " us"<< std::endl;
     return 0;

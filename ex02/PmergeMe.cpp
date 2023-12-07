@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:21:18 by vstockma          #+#    #+#             */
-/*   Updated: 2023/12/07 15:51:53 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/12/07 16:41:08 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int issorted(char **av, int ac)
         int current = atoi(av[i]);
         int next = atoi(av[i + 1]);
 
-        if (current > next)
-            return 0;
+        if (current > next) return 0;
     }
     std::cout << "Already sorted\n";
     return 1;
@@ -60,37 +59,33 @@ int dupnumber(char **av, long num, int i)
         std::size_t end = input.find_first_not_of("0123456789", 0);
         std::string numStr = input.substr(0, end);
         long number = std::strtol(numStr.c_str(), NULL, 10);
-        if (number == num)
-            return 1;      
+        if (number == num) return 1;      
     }
     return 0;
 }
 
 int Pmerge::checknumbers(char **av)
 {
-    for (int i = 1; av[i] != NULL; ++i)
-    {
-        std::string input(av[i]);
-        if (input.empty()) return 1;
-        for (std::size_t j = 0; j < input.size(); ++j)
-        {
-            if (std::isdigit(input[j]))
-            {
-                std::size_t start = j;
-                std::size_t end = input.find_first_not_of("0123456789", start);
-                std::string numStr = input.substr(start, end - start);
-                j = end - 1;
-                long number = std::strtol(numStr.c_str(), NULL, 10);
-
-                if (number > 2147483647 || number < std::numeric_limits<int>::min())
-                    return 2;
-                if (dupnumber(av, number, i) == 1)
-                    return 3;
-            }
-            else return 4;
-        }
-    }
-    return 0;
+	for (int i = 1; av[i] != NULL; ++i)
+		{
+			std::string input(av[i]);
+			if (input.empty()) return 1;
+			for (std::size_t j = 0; j < input.size(); ++j)
+			{
+				if (std::isdigit(input[j]))
+				{
+					std::size_t start = j;
+					std::size_t end = input.find_first_not_of("0123456789", start);
+					std::string numStr = input.substr(start, end - start);
+					j = end - 1;
+					long number = std::strtol(numStr.c_str(), NULL, 10);
+					if (number > 2147483647 || number < std::numeric_limits<int>::min()) return 2;
+					if (dupnumber(av, number, i) == 1) return 3;
+				}
+				else return 4;
+			}
+		}
+	return 0;
 }
 
 void    makepairvector(Pmerge* merge)
@@ -149,10 +144,7 @@ void    startFinalVector(Pmerge* merge)
 void    finishFinalVectorInsertion(Pmerge* merge)
 {
     for (std::vector<std::pair<int, int> >::iterator it = merge->pairvector.begin() + 1; it != merge->pairvector.end(); it++)
-    {
-        if (it->second >= 0)
-            merge->finalvector.insert(binaryVector(merge->finalvector, it->second), it->second);
-    }
+        if (it->second >= 0) merge->finalvector.insert(binaryVector(merge->finalvector, it->second), it->second);
 }
 
 std::vector<int>::iterator binaryVector(std::vector<int>& finalvector, int number)
@@ -228,10 +220,7 @@ void    startFinalDeque(Pmerge* merge)
 void    finishFinalDequeInsertion(Pmerge* merge)
 {
     for (std::deque<std::pair<int, int> >::iterator it = merge->pairdeque.begin() + 1; it != merge->pairdeque.end(); it++)
-    {
-        if (it->second >= 0)
-            merge->finaldeque.insert(binaryDeque(merge->finaldeque, it->second), it->second);
-    }
+        if (it->second >= 0) merge->finaldeque.insert(binaryDeque(merge->finaldeque, it->second), it->second);
 }
 
 std::deque<int>::iterator binaryDeque(std::deque<int>& finaldeque, int number)
