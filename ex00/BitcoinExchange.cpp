@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:27:46 by vstockma          #+#    #+#             */
-/*   Updated: 2023/12/08 12:39:11 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/12/08 14:56:03 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,8 @@ void BitcoinExchange::processInputLine(const std::string& date_str, const std::s
     {
         it = map.lower_bound(date_str);
 
-        if (it != map.begin()) {
+        if (it != map.begin())
             --it;
-        }
         float result_value = it->second * input_value;
         std::cout << date_str << " => " << input_value << " = " << result_value << std::endl;
     }
@@ -158,7 +157,7 @@ int BitcoinExchange::output(std::string file)
             std::string date_str = trim(line.substr(0, pos));
             std::string value_str = trim(line.substr(pos + 1));
 
-            if (checkdate(date_str) != 0) 
+            if (checkdate(date_str) != 0)
                 continue;
             if (checkvalue(value_str) != 0)
                 continue;
@@ -198,7 +197,6 @@ int BitcoinExchange::getmap(std::istream& inputStream)
         {
             delimiter = getdelimiter(line);
             isFirstLine = false;
-            continue;
         }
         if (line.empty())
             continue;
@@ -214,7 +212,7 @@ int BitcoinExchange::getmap(std::istream& inputStream)
                 std::istringstream(value_str) >> value;
                 map.insert(std::make_pair(date_str, value));
             }
-       }
+        }
     }
     return 0;
 }
