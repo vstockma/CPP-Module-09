@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:12:13 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/23 15:29:22 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:56:32 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int main(int ac, char **av)
 {
-    (void)av;
     BitcoinExchange btc;
     if (ac != 2)
     {
@@ -31,14 +30,5 @@ int main(int ac, char **av)
     }
     inputFile.close();
     btc.output(av[1]);
-    // for (std::map<std::string, float>::const_iterator it = btc.map.begin(); it != btc.map.end(); ++it) {
-    //     std::cout << it->first << " | " << it->second << std::endl;
-    // }
-    // std::map<std::string, float>::const_iterator it = btc.map.begin();
-    // for (int i = 0; i < 10; ++i)
-    // {
-    //     std::cout << it->first << " | " << it->second << std::endl;
-    //     it++;
-    // }
     return 0;
 }

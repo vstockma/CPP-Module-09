@@ -6,7 +6,7 @@
 /*   By: vstockma <vstockma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 13:27:46 by vstockma          #+#    #+#             */
-/*   Updated: 2023/11/27 14:57:08 by vstockma         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:39:11 by vstockma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ int BitcoinExchange::checkdate(const std::string& date)
         std::cerr << "Error: invalid date: " << date << std::endl;
         return 1;
     }
+    std::string currentDate = getCurrentDate();
+    if (date > currentDate) {
+        std::cerr << "Error: Date cannot be in the future: " << date << std::endl;
+        return 1;
+    }
     int daysInMonth = (month == 2 && isLeapYear(year)) ? 29 : 31;
 
     if (month == 4 || month == 6 || month == 9 || month == 11) {
@@ -114,7 +119,9 @@ void BitcoinExchange::processInputLine(const std::string& date_str, const std::s
     std::istringstream(value_str) >> input_value;
 
     std::map<std::string, float>::iterator it = map.find(date_str);
-    if (it != map.end())
+    if (map.empty())
+        std::cout << "Error: can not find date cause file is empty" << std::endl;
+    else if (it != map.end())
     {
         float stored_value = it->second;
         float result_value = input_value * stored_value;
@@ -169,9 +176,7 @@ char getdelimiter(const std::string& line)
     {
         char ch = *it;
         if (!std::isalnum(ch))
-        {
             return ch;
-        }
     }
     return '\0';
 }
@@ -202,25 +207,14 @@ int BitcoinExchange::getmap(std::istream& inputStream)
 
         if (std::getline(iss, date_str, delimiter) && std::getline(iss >> std::ws, value_str))
         {
-            if (date_str.size() != 10 || date_str[4] != '-' || date_str[7] != '-')
-            {
-                std::cerr << "Invalid date format at line: " << line << std::endl;
-                return 1;
-            }
-
             size_t invalidCharPos = value_str.find_first_not_of("0123456789.");
-            if (invalidCharPos == std::string::npos) {
+            if (invalidCharPos == std::string::npos)
+            {
                 float value;
                 std::istringstream(value_str) >> value;
                 map.insert(std::make_pair(date_str, value));
-            } else {
-                std::cerr << "Invalid value at line: " << line << std::endl;
-                return 1;
             }
-        } else {
-            std::cerr << "Error at line: " << line << std::endl;
-            return 1;
-        }
+       }
     }
     return 0;
 }
